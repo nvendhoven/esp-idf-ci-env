@@ -11,14 +11,15 @@
 # Author: Javier James
 # Company: Kien 
 
+FROM ubuntu:trusty
+RUN apt update && apt install -y build-essential
 
 FROM ubuntu:18.04
-
 ENV IDF_PATH="/opt/local/espressif/esp-idf" \
     PATH="/opt/local/espressif/xtensa-esp32-elf/bin:${PATH}" \
     IDF_TOOLS_PATH = IDF_PATH
 RUN apt-get update \
-    && apt-get install -y gcc git wget make libncurses-dev flex bison gperf python python-pip python-setuptools python-serial python-cryptography python-future \
+    && apt-get install -y build-essential gcc git wget make libncurses-dev flex bison gperf python python-pip python-setuptools python-serial python-cryptography python-future \
 	cmake ninja-build ccache libffi-dev libssl-dev && rm -r /var/lib/apt/lists/*
 RUN mkdir -p /opt/local/espressif/  
 RUN git clone -b v4.1 --depth 1 --recursive https://github.com/espressif/esp-idf.git $IDF_PATH \
